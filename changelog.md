@@ -1,3 +1,6 @@
+## v2.1.1
+- **Fixed** segfault maybe reported by brittank
+
 ## v2.1.0
 - **Added** trail timer setting
 

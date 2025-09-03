@@ -14,7 +14,7 @@ namespace Trail {
         /// could make shit const but like idc it looks ugly with my theme (yes thats my only reason)
         auto& p1Points = editor->m_playerPoints;
         auto size = p1Points.size();
-        if (editor->m_player1 && size > 1) {
+        if (size > 1) {
             Utils::drawLine(
                 Cache::trailDraw,
                 p1Points[size - 2], p1Points[size - 1], Settings::p1TrailSize, 
@@ -26,8 +26,9 @@ namespace Trail {
 
         if (p2PointsVector.empty()) return; // robtop saves p2 points as a vector of vectors
 
-        auto& p2Points = p2PointsVector[p2PointsVector.size() - 1];
-        if (editor->m_player2 && p2Points.size() > 1) {
+        auto& p2Points = p2PointsVector.back();
+        size = p2Points.size();
+        if (size > 1) {
             Utils::drawLine(
                 Cache::trailDraw,
                 p2Points[size - 2], p2Points[size - 1], Settings::p2TrailSize, 
