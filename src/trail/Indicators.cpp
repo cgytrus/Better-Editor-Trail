@@ -54,27 +54,27 @@ namespace Trail {
     }
 
     void drawArrow(const CCPoint& pos, float size, PlayerButton button, const ccColor4F& col) {
-        float half = size / 2;
+        float half = size * 0.5f * std::sqrt(2.0f) * 0.5f;
         float offset = size * 1.5f;
         float tip = offset * 2;
 
         switch (button) {
             case PlayerButton::Jump: {
-                Utils::drawLine(Cache::indicatorDraw, {pos.x, pos.y - offset}, {pos.x, pos.y + offset}, half, col);
-                Utils::drawLine(Cache::indicatorDraw, {pos.x, pos.y + offset}, {pos.x + offset, pos.y}, half, col);
-                Utils::drawLine(Cache::indicatorDraw, {pos.x, pos.y + offset}, {pos.x - offset, pos.y}, half, col);
+                Utils::drawLine(Cache::indicatorDraw, {pos.x, pos.y - offset}, {pos.x, pos.y + offset}, size, col);
+                Utils::drawLine(Cache::indicatorDraw, {pos.x - half, pos.y + offset + half}, {pos.x + offset, pos.y}, size, col);
+                Utils::drawLine(Cache::indicatorDraw, {pos.x + half, pos.y + offset + half}, {pos.x - offset, pos.y}, size, col);
                 break;
             }
             case PlayerButton::Right: {
-                Utils::drawLine(Cache::indicatorDraw, pos, {pos.x + tip, pos.y}, half, col);
-                Utils::drawLine(Cache::indicatorDraw, {pos.x + tip, pos.y}, {pos.x + offset, pos.y + offset}, half, col);
-                Utils::drawLine(Cache::indicatorDraw, {pos.x + tip, pos.y}, {pos.x + offset, pos.y - offset}, half, col);
+                Utils::drawLine(Cache::indicatorDraw, pos, {pos.x + tip, pos.y}, size, col);
+                Utils::drawLine(Cache::indicatorDraw, {pos.x + tip + half, pos.y - half}, {pos.x + offset, pos.y + offset}, size, col);
+                Utils::drawLine(Cache::indicatorDraw, {pos.x + tip + half, pos.y + half}, {pos.x + offset, pos.y - offset}, size, col);
                 break;
             }
             case PlayerButton::Left: {
-                Utils::drawLine(Cache::indicatorDraw, pos, {pos.x - tip, pos.y}, half, col);
-                Utils::drawLine(Cache::indicatorDraw, {pos.x - tip, pos.y}, {pos.x - offset, pos.y + offset}, half, col);
-                Utils::drawLine(Cache::indicatorDraw, {pos.x - tip, pos.y}, {pos.x - offset, pos.y - offset}, half, col);
+                Utils::drawLine(Cache::indicatorDraw, pos, {pos.x - tip, pos.y}, size, col);
+                Utils::drawLine(Cache::indicatorDraw, {pos.x - tip - half, pos.y - half}, {pos.x - offset, pos.y + offset}, size, col);
+                Utils::drawLine(Cache::indicatorDraw, {pos.x - tip - half, pos.y + half}, {pos.x - offset, pos.y - offset}, size, col);
                 break;
             }
         }

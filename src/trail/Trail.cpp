@@ -6,23 +6,17 @@
 
 using namespace geode::prelude;
 
-struct PlayerState {
-    bool moving = false;
-    bool jump = false;
-    bool left = false;
-    bool right = false;
-    CCPoint pos = ccp(0.0f, 0.0f);
-} playerStates[2];
-
 namespace Trail {
     void startMove(PlayerObject* player, PlayerButton click) {
         if (!Cache::trailRendering) return;
 
         bool p2 = player->m_isSecondPlayer;
-        PlayerState& state = playerStates[p2];
+        auto& state = Cache::playerStates[p2];
 
         if (state.moving) return;
         state.moving = true;
+
+        const CCPoint& pos = player->getPosition();
 
         if (static_cast<int>(click) > 0)
             Trail::createClick(player, click);
@@ -30,14 +24,16 @@ namespace Trail {
         state.jump = state.jump || click == PlayerButton::Jump;
         state.left = state.left || click == PlayerButton::Left;
         state.right = state.right || click == PlayerButton::Right;
-        state.pos = player->getPosition();
+        if (state.pos != pos)
+            state.prevPos = state.pos;
+        state.pos = pos;
     }
 
     void endMove(PlayerObject* player, PlayerButton release) {
         if (!Cache::trailRendering) return;
 
         bool p2 = player->m_isSecondPlayer;
-        PlayerState& state = playerStates[p2];
+        auto& state = Cache::playerStates[p2];
 
         if (!state.moving) return;
         state.moving = false;
@@ -53,7 +49,7 @@ namespace Trail {
             bool input = state.jump || state.left || state.right;
             const ccColor4F& trailCol = input ? holdTrailCol : releaseTrailCol;
 
-            Utils::drawLine(Cache::trailDraw, state.pos, pos, trailSize, trailCol);
+            Utils::drawAngle(Cache::trailDraw, state.prevPos, state.pos, pos, trailSize, trailCol);
         }
 
         if (static_cast<int>(release) > 0)
@@ -62,6 +58,8 @@ namespace Trail {
         state.jump = state.jump && release != PlayerButton::Jump;
         state.left = state.left && release != PlayerButton::Left;
         state.right = state.right && release != PlayerButton::Right;
+        if (state.pos != pos)
+            state.prevPos = state.pos;
         state.pos = pos;
     }
 

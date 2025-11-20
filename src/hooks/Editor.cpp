@@ -58,6 +58,20 @@ class $modify(Editor, LevelEditorLayer) {
         LevelEditorLayer::onPlaytest();
         Trail::startTrail();
         Trail::toggleTrail(!Settings::hideWhenPlaytesting);
+
+        Cache::playerStates[0].moving = false;
+        Cache::playerStates[0].jump = false;
+        Cache::playerStates[0].left = false;
+        Cache::playerStates[0].right = false;
+        Cache::playerStates[0].pos = m_player1 ? m_player1->getPosition() : ccp(0.0f, 0.0f);
+        Cache::playerStates[0].prevPos = Cache::playerStates[0].pos;
+
+        Cache::playerStates[1].moving = false;
+        Cache::playerStates[1].jump = false;
+        Cache::playerStates[1].left = false;
+        Cache::playerStates[1].right = false;
+        Cache::playerStates[1].pos = m_player2 ? m_player2->getPosition() : ccp(0.0f, 0.0f);
+        Cache::playerStates[1].prevPos = Cache::playerStates[1].pos;
     }
 
     void onStopPlaytest() {
