@@ -33,12 +33,20 @@ namespace Utils {
 
         auto perp0 = ccp(-dir0.y * thickness, dir0.x * thickness);
 
-        CCPoint v[] {
-            p1 + perp0,
-            p1 + perp1, p2 + perp1, p2 - perp1, p1 - perp1,
-            p1 - perp0
-        };
-        drawNode->drawPolygon(v, 6, col, std::numeric_limits<float>::epsilon(), col);
+        if (std::atan2f(dir0.cross(dir1), dir0.dot(dir1)) > 0.0f) {
+            CCPoint v[] {
+                p1 + perp1, p2 + perp1, p2 - perp1, p1 - perp1,
+                p1 - perp0
+            };
+            drawNode->drawPolygon(v, 5, col, std::numeric_limits<float>::epsilon(), col);
+        }
+        else {
+            CCPoint v[] {
+                p1 + perp0,
+                p1 + perp1, p2 + perp1, p2 - perp1, p1 - perp1
+            };
+            drawNode->drawPolygon(v, 5, col, std::numeric_limits<float>::epsilon(), col);
+        }
     }
 
     void getTrailLayer(LevelEditorLayer* editor) {
