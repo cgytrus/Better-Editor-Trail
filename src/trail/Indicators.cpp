@@ -32,7 +32,7 @@ namespace Trail {
         }
     }
 
-    void drawIndicator(CCPoint pos, float size, IndicatorShape shape, const ccColor4F& col) {
+    void drawIndicator(const CCPoint& pos, float size, IndicatorShape shape, const ccColor4F& col) {
         switch (shape) {
             case IndicatorShape::Square: {
                 Cache::indicatorDraw->drawDot(pos, size, col);
@@ -53,7 +53,7 @@ namespace Trail {
         }
     }
 
-    void drawArrow(CCPoint pos, float size, PlayerButton button, const ccColor4F& col) {
+    void drawArrow(const CCPoint& pos, float size, PlayerButton button, const ccColor4F& col) {
         float half = size / 2;
         float offset = size * 1.5f;
         float tip = offset * 2;
@@ -80,7 +80,7 @@ namespace Trail {
         }
     }
 
-    void drawTriangle(CCPoint pos, float size, const ccColor4F& col) {
+    void drawTriangle(const CCPoint& pos, float size, const ccColor4F& col) {
         CCPoint polygon[] = {
             {pos.x - size, pos.y - size},
             {pos.x + size, pos.y - size},
@@ -90,7 +90,7 @@ namespace Trail {
         Cache::indicatorDraw->drawPolygon(polygon, 3, col, 0.0f, col);
     }
 
-    void drawPrism(CCPoint pos, float size, const ccColor4F& col) {
+    void drawPrism(const CCPoint& pos, float size, const ccColor4F& col) {
         auto halfSize = size / 2;
 
         CCPoint polygon[] = {
