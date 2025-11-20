@@ -48,10 +48,22 @@ class $modify(Editor, LevelEditorLayer) {
     }
 
     void postUpdate(float p0) {
-        if (m_player1)
+        if (m_player1) {
+            if (m_player1->m_wasTeleported) {
+                Cache::playerStates[0].moving = false;
+                Cache::playerStates[0].pos = m_player1->getPosition();
+                Cache::playerStates[0].prevPos = Cache::playerStates[0].pos;
+            }
             Trail::endMove(m_player1, static_cast<PlayerButton>(0));
-        if (m_player2)
+        }
+        if (m_player2) {
+            if (m_player2->m_wasTeleported) {
+                Cache::playerStates[1].moving = false;
+                Cache::playerStates[1].pos = m_player2->getPosition();
+                Cache::playerStates[1].prevPos = Cache::playerStates[1].pos;
+            }
             Trail::endMove(m_player2, static_cast<PlayerButton>(0));
+        }
         LevelEditorLayer::postUpdate(p0);
     }
 
