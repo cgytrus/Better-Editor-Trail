@@ -50,6 +50,12 @@ namespace Trail {
             bool indicateHolding = p2 ? Settings::p2IndicateHolding : Settings::p1IndicateHolding;
             const ccColor4F& trailCol = input && indicateHolding ? holdTrailCol : releaseTrailCol;
 
+            if (state.prevPos == state.pos) {
+                Cache::trailDraw->drawCircle(
+                    state.pos, trailSize * 0.5f, trailCol,
+                    std::numeric_limits<float>::epsilon(), trailCol, 16
+                );
+            }
             Utils::drawAngle(Cache::trailDraw, state.prevPos, state.pos, pos, trailSize, trailCol);
         }
 
