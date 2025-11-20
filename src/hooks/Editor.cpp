@@ -28,7 +28,7 @@ class $modify(Editor, LevelEditorLayer) {
             draw = CCDrawNode::create();
             draw->setPosition(0.0f, 0.0f);
             draw->setBlendFunc({GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA});
-            draw->disableDrawArea();
+            draw->m_bUseArea = false;
             Cache::trailLayer->addChild(draw);
         }
         Cache::trailDraw = draws[0];
