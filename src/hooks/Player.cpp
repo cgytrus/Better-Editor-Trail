@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayerObject.hpp>
 #include "../trail/Trail.hpp"
+#include "../shared/Cache.hpp"
 
 using namespace geode::prelude;
 
@@ -25,5 +26,14 @@ class $modify(Player, PlayerObject) {
         if (!m_editorEnabled) return PlayerObject::update(dt);
         Trail::startMove(this, static_cast<PlayerButton>(0));
         PlayerObject::update(dt);
+    }
+
+    void copyAttributes(PlayerObject* from) {
+        PlayerObject::copyAttributes(from);
+        if (!m_editorEnabled) return;
+        Cache::playerStates[m_isSecondPlayer] = Cache::playerStates[!m_isSecondPlayer];
+        Cache::playerStates[m_isSecondPlayer].pos = this->getPosition();
+        Cache::playerStates[m_isSecondPlayer].prevPos = this->getPosition();
+        //Cache::playerStates[m_isSecondPlayer].prevPos = Cache::playerStates[m_isSecondPlayer].pos;
     }
 };

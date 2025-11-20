@@ -14,7 +14,7 @@ namespace Trail {
         if (Settings::showClickDirection && player->m_isPlatformer) {
             drawArrow(player->getPosition(), Settings::clickSize, button, col);
         }
-        else {
+        else if (player->m_isPlatformer || button == PlayerButton::Jump) {
             drawIndicator(player->getPosition(), Settings::clickSize, Settings::clickShape, col);
         }
     }
@@ -27,7 +27,7 @@ namespace Trail {
         if (Settings::showReleaseDirection && player->m_isPlatformer) {
             drawArrow(player->getPosition(), Settings::releaseSize, button, col);
         }
-        else {
+        else if (player->m_isPlatformer || button == PlayerButton::Jump) {
             drawIndicator(player->getPosition(), Settings::releaseSize, Settings::releaseShape, col);
         }
     }
