@@ -47,7 +47,8 @@ namespace Trail {
             const ccColor4F& holdTrailCol = p2 ? Settings::p2HoldTrailCol : Settings::p1HoldTrailCol;
 
             bool input = state.jump || state.left || state.right;
-            const ccColor4F& trailCol = input ? holdTrailCol : releaseTrailCol;
+            bool indicateHolding = p2 ? Settings::p2IndicateHolding : Settings::p1IndicateHolding;
+            const ccColor4F& trailCol = input && indicateHolding ? holdTrailCol : releaseTrailCol;
 
             Utils::drawAngle(Cache::trailDraw, state.prevPos, state.pos, pos, trailSize, trailCol);
         }
