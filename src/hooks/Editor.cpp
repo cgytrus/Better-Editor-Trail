@@ -31,18 +31,19 @@ class $modify(Editor, LevelEditorLayer) {
             draw->disableDrawArea();
             Cache::trailLayer->addChild(draw);
         }
-        draws[0]->setID("better-trail-trail"_spr);
-        draws[1]->setID("better-trail-indicators"_spr);
         Cache::trailDraw = draws[0];
         Cache::indicatorDraw = draws[1];
 
+        Cache::trailDraw->setID("better-trail-trail"_spr);
+        Cache::indicatorDraw->setID("better-trail-indicators"_spr);
+
         Cache::p1TrailCol = Settings::p1UseColor
-        ? ccc4FFromccc3B(m_player1->m_playerColor1)
-        : Settings::p1TrailCol;
+            ? ccc4FFromccc3B(m_player1->m_playerColor1)
+            : Settings::p1TrailCol;
 
         Cache::p2TrailCol = Settings::p2UseColor
-        ? ccc4FFromccc3B(m_player2->m_playerColor2)
-        : Settings::p2TrailCol;
+            ? ccc4FFromccc3B(m_player2->m_playerColor2)
+            : Settings::p2TrailCol;
 
         return true;
     }
